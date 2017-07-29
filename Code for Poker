@@ -1,0 +1,610 @@
+#include <iostream>
+#include <fstream>
+
+using namespace std;
+
+void pokerGame();
+
+int main()
+{
+
+    pokerGame();
+
+    return 0;
+}
+
+
+void pokerGame(){
+
+    ifstream read("Combinations.txt");
+
+    int firstPlayerCounter = 0;
+
+
+    for(int a = 0;a<=999;a++){
+        bool royalFlush = false;
+        bool straitFlushOne = false;
+        bool fourOfKindOne = false;
+        bool fullHouseOne = false;
+        bool flushOne = false;
+        bool straightOne = false;
+        bool threeKindOne = false;
+        bool twoPairsOne = false;
+        bool onePairFirstOptionOne = false;
+        bool onePairSecondOptionOne = false;
+        bool onePairThirdOptionOne = false;
+        bool onePairFourthOptionOne = false;
+        bool onePairTotaly = false;
+        bool noCombinationOne = false;
+
+        bool straitFlushTwo = false;
+        bool fourOfKindTwo = false;
+        bool fullHouseTwo = false;
+        bool flushTwo = false;
+        bool straightTwo = false;
+        bool threeKindTwo = false;
+        bool twoPairsTwo = false;
+        bool onePairFirstOptionTwo = false;
+        bool onePairSecondOptionTwo = false;
+        bool onePairThirdOptionTwo = false;
+        bool onePairFourthOptionTwo = false;
+         bool onePairTotalyTwo = false;
+        bool noCombinationTwo = false;
+
+        int playerOneInteger[5];
+        int playerTwoInteger[5];
+
+        cout << "Player 1:";
+
+        for(int a = 0; a < 5; a++){
+            string playerOneCard;
+            string firstLetter;
+            string secondLetter;
+            int cardType;
+            int cardSuit;
+            read >> playerOneCard;
+            cout << playerOneCard << " " ;
+            firstLetter=playerOneCard.at(0);
+            secondLetter=playerOneCard.at(1);
+
+            if(firstLetter=="J"){
+                cardType=21;
+            }
+            else if(firstLetter=="Q"){
+                cardType=22;
+            }
+            else if(firstLetter=="K"){
+                cardType=23;
+            }
+            else if(firstLetter=="A"){
+                cardType=24;
+            }
+            else if(firstLetter=="T"){
+                cardType=20;
+            }
+            else if(firstLetter=="9"){
+                cardType=19;
+            }
+            else if(firstLetter=="8"){
+                cardType=18;
+            }
+            else if(firstLetter=="7"){
+                cardType=17;
+            }
+            else if(firstLetter=="6"){
+                cardType=16;
+            }
+            else if(firstLetter=="5"){
+                cardType=15;
+            }
+            else if(firstLetter=="4"){
+                cardType=14;
+            }
+            else if(firstLetter=="3"){
+                cardType=13;
+            }
+            else if(firstLetter=="2"){
+                cardType=12;
+            }
+
+            if(secondLetter=="D"){
+                cardSuit=1;
+            }
+            else if(secondLetter=="C"){
+                cardSuit=2;
+            }
+            else if(secondLetter=="H"){
+                cardSuit=3;
+            }
+            else if(secondLetter=="S"){
+                cardSuit=4;
+            }
+            playerOneInteger[a]=cardType*10+cardSuit;
+
+        }
+
+        for(int a = 0;a < 5;a++){
+            for(int b = a+1;b < 5;b++){
+                    int substitution;
+                if(playerOneInteger[a]>playerOneInteger[b]){
+                    substitution=playerOneInteger[a];
+                    playerOneInteger[a]=playerOneInteger[b];
+                    playerOneInteger[b]=substitution;
+                }
+            }
+
+        }
+
+        cout << endl << "Player 2:" ;
+        for(int a = 0; a < 5; a++){
+            string playerTwoCard;
+            string firstLetterTwo;
+            string secondLetterTwo;
+            int cardTypeTwo;
+            int cardSuitTwo;
+            read >> playerTwoCard;
+            cout << playerTwoCard << " " ;
+
+            firstLetterTwo=playerTwoCard.at(0);
+            secondLetterTwo=playerTwoCard.at(1);
+
+            if(firstLetterTwo=="J"){
+                cardTypeTwo=21;
+            }
+            else if(firstLetterTwo=="Q"){
+                cardTypeTwo=22;
+            }
+            else if(firstLetterTwo=="K"){
+                cardTypeTwo=23;
+            }
+            else if(firstLetterTwo=="A"){
+                cardTypeTwo=24;
+            }
+            else if(firstLetterTwo=="T"){
+                cardTypeTwo=20;
+            }
+            else if(firstLetterTwo=="9"){
+                cardTypeTwo=19;
+            }
+            else if(firstLetterTwo=="8"){
+                cardTypeTwo=18;
+            }
+            else if(firstLetterTwo=="7"){
+                cardTypeTwo=17;
+            }
+            else if(firstLetterTwo=="6"){
+                cardTypeTwo=16;
+            }
+            else if(firstLetterTwo=="5"){
+                cardTypeTwo=15;
+            }
+            else if(firstLetterTwo=="4"){
+                cardTypeTwo=14;
+            }
+            else if(firstLetterTwo=="3"){
+                cardTypeTwo=13;
+            }
+            else if(firstLetterTwo=="2"){
+                cardTypeTwo=12;
+            }
+
+            if(secondLetterTwo=="D"){
+                cardSuitTwo=1;
+            }
+            else if(secondLetterTwo=="C"){
+                cardSuitTwo=2;
+            }
+            else if(secondLetterTwo=="H"){
+                cardSuitTwo=3;
+            }
+            else if(secondLetterTwo=="S"){
+                cardSuitTwo=4;
+            }
+            playerTwoInteger[a]=cardTypeTwo*10+cardSuitTwo;
+
+        }
+        cout<<endl;
+        for(int a = 0;a < 5;a++){
+            for(int b = a+1;b < 5;b++){
+                    int substitutionTwo;
+                if(playerTwoInteger[a]>playerTwoInteger[b]){
+                    substitutionTwo=playerTwoInteger[a];
+                    playerTwoInteger[a]=playerTwoInteger[b];
+                    playerTwoInteger[b]=substitutionTwo;
+                }
+            }
+        }
+
+        cout << endl;
+        //First player combinations start
+
+        if(playerOneInteger[0]+playerOneInteger[1]+playerOneInteger[2]+playerOneInteger[3]+playerOneInteger[4]==60){
+            royalFlush = true;
+            firstPlayerCounter += 1;
+            cout<<"Player 1 : royal flush"<<endl;
+        }
+
+        else if(playerOneInteger[0]/10==(playerOneInteger[1]/10)-1
+                &&playerOneInteger[0]/10==(playerOneInteger[2]/10)-2
+                &&playerOneInteger[0]/10==(playerOneInteger[3]/10)-3
+                &&playerOneInteger[0]/10==(playerOneInteger[4]/10)-4
+                &&playerOneInteger[0]%10==playerOneInteger[1]%10
+                &&playerOneInteger[0]%10==playerOneInteger[2]%10
+                &&playerOneInteger[0]%10==playerOneInteger[3]%10
+                &&playerOneInteger[0]%10==playerOneInteger[4]%10&&royalFlush==false){
+
+                    straitFlushOne = true;
+                    cout<<"Player 1 : street flush"<<endl;
+
+                }
+
+        else if((playerOneInteger[0]/10==playerOneInteger[1]/10
+                &&playerOneInteger[0]/10==playerOneInteger[2]/10
+                &&playerOneInteger[0]/10==playerOneInteger[3]/10)
+                ||(playerOneInteger[1]/10==playerOneInteger[2]/10
+                &&playerOneInteger[1]/10==playerOneInteger[3]/10
+                &&playerOneInteger[1]/10==playerOneInteger[4]/10)){
+
+                    fourOfKindOne = true;
+                    cout<<"Player 1 : four of kind"<<endl;
+                }
+
+        else if((playerOneInteger[0]/10==playerOneInteger[1]/10
+                &&playerOneInteger[2]/10==playerOneInteger[3]/10
+                &&playerOneInteger[2]/10==playerOneInteger[4]/10)
+                ||(playerOneInteger[0]/10==playerOneInteger[1]/10
+                &&playerOneInteger[0]/10==playerOneInteger[2]/10
+                &&playerOneInteger[3]/10==playerOneInteger[4]/10)){
+
+                    fullHouseOne = true;
+                    cout<<"Player 1 : full house"<<endl;
+                }
+
+        else if(playerOneInteger[0]%10==playerOneInteger[1]%10
+                &&playerOneInteger[0]%10==playerOneInteger[2]%10
+                &&playerOneInteger[0]%10==playerOneInteger[3]%10
+                &&playerOneInteger[0]%10==playerOneInteger[4]%10
+                &&straitFlushOne==false&&royalFlush==false){
+                    flushOne = true;
+                    cout<<"Player 1 : flush"<<endl;
+                }
+
+        else if(playerOneInteger[0]/10==(playerOneInteger[1]/10)-1
+                &&playerOneInteger[0]/10==(playerOneInteger[2]/10)-2
+                &&playerOneInteger[0]/10==(playerOneInteger[3]/10)-3
+                &&playerOneInteger[0]/10==(playerOneInteger[4]/10)-4&&straitFlushOne==false&&royalFlush==false){
+                    straightOne = true;
+                    cout<<"Player 1 : strait"<<endl;
+                }
+
+        else if((playerOneInteger[0]/10==playerOneInteger[1]/10
+                &&playerOneInteger[0]/10==playerOneInteger[2]/10&&fourOfKindOne==false&&fullHouseOne==false)
+                ||(playerOneInteger[1]/10==playerOneInteger[2]/10
+                &&playerOneInteger[1]/10==playerOneInteger[3]/10&&fourOfKindOne==false&&fullHouseOne==false)
+                ||(playerOneInteger[2]/10==playerOneInteger[3]/10
+                &&playerOneInteger[2]/10==playerOneInteger[4]/10&&fourOfKindOne==false&&fullHouseOne==false)){
+                    threeKindOne = true;
+                    cout<<"Player 1 : three of a kind"<<endl;
+                }
+
+        else if((playerOneInteger[0]/10==playerOneInteger[1]/10
+                &&playerOneInteger[2]/10==playerOneInteger[3]/10)
+                ||(playerOneInteger[0]/10==playerOneInteger[1]/10
+                &&playerOneInteger[3]/10==playerOneInteger[4]/10)
+                ||(playerOneInteger[1]/10==playerOneInteger[2]/10
+                &&playerOneInteger[3]/10==playerOneInteger[4]/10)){
+                    twoPairsOne = true;
+                    cout<<"Player 1 : two pairs"<<endl;
+                }
+
+        else if(playerOneInteger[0]/10==playerOneInteger[1]/10
+                &&fourOfKindOne==false
+                &&fullHouseOne==false
+                &&threeKindOne==false
+                &&twoPairsOne==false){
+                    onePairFirstOptionOne = true;
+                    onePairTotaly = true;
+                cout<<"Player 1 : pair"<<endl;
+        }
+
+          else if(playerOneInteger[1]/10==playerOneInteger[2]/10
+                &&fourOfKindOne==false
+                &&fullHouseOne==false
+                &&threeKindOne==false
+                &&twoPairsOne==false){
+                    onePairSecondOptionOne = true;
+                    onePairTotaly = true;
+                    cout<<"Player 1 : pair"<<endl;
+        }
+
+          else if(playerOneInteger[2]/10==playerOneInteger[3]/10
+                &&fourOfKindOne==false
+                &&fullHouseOne==false
+                &&threeKindOne==false
+                &&twoPairsOne==false){
+                    onePairThirdOptionOne = true;
+                    onePairTotaly = true;
+                    cout<<"Player 1 : pair"<<endl;
+        }
+
+          else if(playerOneInteger[3]/10==playerOneInteger[4]/10
+                &&fourOfKindOne==false
+                &&fullHouseOne==false
+                &&threeKindOne==false
+                &&twoPairsOne==false){
+                    onePairFourthOptionOne = true;
+                    onePairTotaly = true;
+                    cout<<"Player 1 : pair"<<endl;
+        }
+
+          else if(royalFlush == false
+                    &&straitFlushOne == false
+                    &&fourOfKindOne == false
+                    &&fullHouseOne == false
+                    &&flushOne == false
+                    &&straightOne == false
+                    &&threeKindOne == false
+                    &&twoPairsOne == false
+                    &&onePairFirstOptionOne ==false
+                    &&onePairSecondOptionOne == false
+                    &&onePairThirdOptionOne == false
+                    &&onePairFourthOptionOne == false ){
+                        cout<<"Player 1 : high card "<<endl;
+                        noCombinationOne = true;
+        }
+
+        //Second player combinations starts
+
+            if(playerTwoInteger[0]+playerTwoInteger[1]+playerTwoInteger[2]+playerTwoInteger[3]+playerTwoInteger[4]==60){
+                    royalFlush = true;
+                    cout<<"Player 2 : royal flush"<<endl<<endl;
+                    }
+
+            else if(playerTwoInteger[0]/10==(playerTwoInteger[1]/10)-1
+                &&playerTwoInteger[0]/10==(playerTwoInteger[2]/10)-2
+                &&playerTwoInteger[0]/10==(playerTwoInteger[3]/10)-3
+                &&playerTwoInteger[0]/10==(playerTwoInteger[4]/10)-4
+                &&playerTwoInteger[0]%10==playerTwoInteger[1]%10
+                &&playerTwoInteger[0]%10==playerTwoInteger[2]%10
+                &&playerTwoInteger[0]%10==playerTwoInteger[3]%10
+                &&playerTwoInteger[0]%10==playerTwoInteger[4]%10&&royalFlush==false){
+                    straitFlushTwo = true;
+                    cout<<"Player 2 : street flush"<<endl<<endl;
+
+                    }
+
+            else if((playerTwoInteger[0]/10==playerTwoInteger[1]/10
+                &&playerTwoInteger[0]/10==playerTwoInteger[2]/10
+                &&playerTwoInteger[0]/10==playerTwoInteger[3]/10)
+                ||(playerTwoInteger[1]/10==playerTwoInteger[2]/10
+                &&playerTwoInteger[1]/10==playerTwoInteger[3]/10
+                &&playerTwoInteger[1]/10==playerTwoInteger[4]/10)){
+                    fourOfKindTwo = true;
+                    cout<<"Player 2 : four of kind"<<endl<<endl;
+                    }
+
+            else if((playerTwoInteger[0]/10==playerTwoInteger[1]/10
+                &&playerTwoInteger[2]/10==playerTwoInteger[3]/10
+                &&playerTwoInteger[2]/10==playerTwoInteger[4]/10)
+                ||(playerTwoInteger[0]/10==playerTwoInteger[1]/10
+                &&playerTwoInteger[0]/10==playerTwoInteger[2]/10
+                &&playerTwoInteger[3]/10==playerTwoInteger[4]/10)){
+                    fullHouseTwo = true;
+                    cout<<"Player 2 : full house"<<endl<<endl;
+                    }
+
+            else if(playerTwoInteger[0]%10==playerTwoInteger[1]%10
+                &&playerTwoInteger[0]%10==playerTwoInteger[2]%10
+                &&playerTwoInteger[0]%10==playerTwoInteger[3]%10
+                &&playerTwoInteger[0]%10==playerTwoInteger[4]%10
+                &&straitFlushTwo==false&&royalFlush==false){
+                    flushTwo = true;
+                    cout<<"Player 2 :  flush"<<endl<<endl;
+                    }
+
+            else if(playerTwoInteger[0]/10==(playerTwoInteger[1]/10)-1
+                &&playerTwoInteger[0]/10==(playerTwoInteger[2]/10)-2
+                &&playerTwoInteger[0]/10==(playerTwoInteger[3]/10)-3
+                &&playerTwoInteger[0]/10==(playerTwoInteger[4]/10)-4&&straitFlushTwo==false&&royalFlush==false){
+                    straightTwo = true;
+                    cout<<"Player 2 : street"<<endl<<endl;
+                    }
+
+            else if((playerTwoInteger[0]/10==playerTwoInteger[1]/10
+                &&playerTwoInteger[0]/10==playerTwoInteger[2]/10&&fourOfKindTwo==false&&fullHouseTwo==false)
+                ||(playerTwoInteger[1]/10==playerTwoInteger[2]/10
+                &&playerTwoInteger[1]/10==playerTwoInteger[3]/10&&fourOfKindTwo==false&&fullHouseTwo==false)
+                ||(playerTwoInteger[2]/10==playerTwoInteger[3]/10
+                &&playerTwoInteger[2]/10==playerTwoInteger[4]/10&&fourOfKindTwo==false&&fullHouseTwo==false)){
+                    threeKindTwo = true;
+                    cout<<"Player 2 : three of kind"<<endl<<endl;
+                    }
+
+            else if((playerTwoInteger[0]/10==playerTwoInteger[1]/10
+                &&playerTwoInteger[2]/10==playerTwoInteger[3]/10)
+                ||(playerTwoInteger[0]/10==playerTwoInteger[1]/10
+                &&playerTwoInteger[3]/10==playerTwoInteger[4]/10)
+                ||(playerTwoInteger[1]/10==playerTwoInteger[2]/10
+                &&playerTwoInteger[3]/10==playerTwoInteger[4]/10)){
+                    twoPairsTwo = true;
+                    cout<<"Player 2 : two pairs"<<endl<<endl;
+                    }
+
+            else if(playerTwoInteger[0]/10==playerTwoInteger[1]/10
+                &&fourOfKindTwo==false
+                &&fullHouseTwo==false
+                &&threeKindTwo==false
+                &&twoPairsTwo==false){
+                    onePairFirstOptionTwo = true;
+                    onePairTotalyTwo = true;
+                    cout<<"Player 2 : pair"<<endl<<endl;
+                    }
+
+          else if(playerTwoInteger[1]/10==playerTwoInteger[2]/10
+                &&fourOfKindTwo==false
+                &&fullHouseTwo==false
+                &&threeKindTwo==false
+                &&twoPairsTwo==false){
+                    onePairSecondOptionTwo = true;
+                    onePairTotalyTwo = true;
+                    cout<<"Player 2 : pair"<<endl<<endl;
+                    }
+
+          else if(playerTwoInteger[2]/10==playerTwoInteger[3]/10
+                &&fourOfKindTwo==false
+                &&fullHouseTwo==false
+                &&threeKindTwo==false
+                &&twoPairsTwo==false){
+                    onePairThirdOptionTwo = true;
+                    onePairTotalyTwo = true;
+                    cout<<"Player 2 : pair"<<endl<<endl;
+                    }
+
+          else if(playerTwoInteger[3]/10==playerTwoInteger[4]/10
+                &&fourOfKindTwo==false
+                &&fullHouseTwo==false
+                &&threeKindTwo==false
+                &&twoPairsTwo==false){
+                    onePairFourthOptionTwo = true;
+                    onePairTotalyTwo = true;
+                    cout<<"Player 2 : pair"<<endl<<endl;
+                    }
+
+           else if(royalFlush == false
+                    &&straitFlushTwo == false
+                    &&fourOfKindTwo == false
+                    &&fullHouseTwo == false
+                    &&flushTwo == false
+                    &&straightTwo == false
+                    &&threeKindTwo == false
+                    &&twoPairsTwo == false
+                    &&onePairFirstOptionTwo ==false
+                    &&onePairSecondOptionTwo == false
+                    &&onePairThirdOptionTwo == false
+                    &&onePairFourthOptionTwo == false ){
+                        cout<<"Player 2 : high card "<<endl;
+                        noCombinationTwo=true;
+                    }
+
+            //Calculation of winner in tie situation in combinations
+
+            if(straitFlushOne==true&&straitFlushTwo==true&&playerOneInteger[0]/10>playerTwoInteger[0]/10){
+                firstPlayerCounter+=1;
+            }
+
+            else if(fourOfKindOne==true&&fourOfKindTwo==true&&playerOneInteger[2]/10>playerTwoInteger[2]/10){
+                firstPlayerCounter+=1;
+            }
+
+           else  if(fullHouseOne==true&&fullHouseTwo==true&&playerOneInteger[2]/10>playerTwoInteger[2]/10){
+                firstPlayerCounter+=1;
+            }
+
+           else  if(flushOne==true&&flushTwo==true&&playerOneInteger[4]/10>playerTwoInteger[4]/10){
+                firstPlayerCounter+=1;
+            }
+
+           else  if(straightOne==true&&straightTwo==true&&playerOneInteger[0]/10>playerTwoInteger[0]/10){
+                firstPlayerCounter+=1;
+            }
+
+           else  if(threeKindOne==true&&threeKindTwo==true&&playerOneInteger[2]/10>playerTwoInteger[2]/10){
+                firstPlayerCounter+=1;
+            }
+
+            else if((twoPairsOne==true&&twoPairsTwo==true&&playerOneInteger[1]/10>playerTwoInteger[1]&&playerOneInteger[1]/10>playerTwoInteger[3])
+               ||(twoPairsOne==true&&twoPairsTwo==true&&playerOneInteger[3]/10>playerTwoInteger[1]&&playerOneInteger[3]/10>playerTwoInteger[3])){
+                firstPlayerCounter+=1;
+               }
+
+            else if((onePairFirstOptionOne==true&&onePairFirstOptionTwo==true
+               &&playerOneInteger[1]/10>playerTwoInteger[1]/10)
+               ||(onePairFirstOptionOne==true&&onePairSecondOptionTwo==true
+               &&playerOneInteger[1]/10>playerTwoInteger[1]/10)
+               ){
+                firstPlayerCounter+=1;
+               }
+
+            else if((onePairSecondOptionOne==true&&onePairSecondOptionTwo==true&&playerOneInteger[2]/10>playerTwoInteger[2]/10)
+               ||(onePairSecondOptionOne==true&&onePairThirdOptionTwo==true
+               &&playerOneInteger[2]/10>playerTwoInteger[2]/10)){
+                firstPlayerCounter+=1;
+               }
+
+            else if((onePairThirdOptionOne==true&&onePairThirdOptionTwo==true&&playerOneInteger[3]/10>playerTwoInteger[3]/10)
+               ||(onePairThirdOptionOne==true&&onePairFourthOptionTwo==true&&playerOneInteger[3]/10>playerTwoInteger[3]/10)){
+                firstPlayerCounter+=1;
+               }
+
+            else if(noCombinationOne==true&&noCombinationTwo==true
+                    &&playerOneInteger[4]>playerTwoInteger[4]){
+                firstPlayerCounter+=1;
+                    }
+
+            //Calculation of winner if one player has the combination stronger than other player
+
+                else if((straitFlushOne==true&&fourOfKindTwo==true)
+                   ||(straitFlushOne==true&&fullHouseTwo==true)
+                   ||(straitFlushOne==true&&flushTwo==true)
+                   ||(straitFlushOne==true&&straightTwo==true)
+                   ||(straitFlushOne==true&&threeKindTwo==true)
+                   ||(straitFlushOne==true&&twoPairsTwo==true)
+                   ||(straitFlushOne==true&&onePairTotalyTwo==true)
+                   ||(straitFlushOne==true&&noCombinationTwo==true)){
+                    firstPlayerCounter+=1;
+                   }
+
+                else if((fourOfKindOne==true&&fullHouseTwo==true)
+                   ||(fourOfKindOne==true&&flushTwo==true)
+                   ||(fourOfKindOne==true&&straightTwo==true)
+                   ||(fourOfKindOne==true&&threeKindTwo==true)
+                   ||(fourOfKindOne==true&&twoPairsTwo==true)
+                   ||(fourOfKindOne==true&&onePairTotalyTwo==true)
+                   ||(fourOfKindOne==true&&noCombinationTwo==true)){
+                    firstPlayerCounter+=1;
+                   }
+
+                else if((fullHouseOne==true&&flushTwo==true)
+                   ||(fullHouseOne==true&&straightTwo==true)
+                   ||(fullHouseOne==true&&threeKindTwo==true)
+                   ||(fullHouseOne==true&&twoPairsTwo==true)
+                   ||(fullHouseOne==true&&onePairTotalyTwo==true)
+                   ||(fullHouseOne==true&&noCombinationTwo==true)){
+                        firstPlayerCounter+=1;
+                }
+
+                else  if((flushOne==true&&straightTwo==true)
+                    ||(flushOne==true&&threeKindTwo==true)
+                    ||(flushOne==true&&twoPairsTwo==true)
+                    ||(flushOne==true&&onePairTotalyTwo==true)
+                    ||(flushOne==true&&noCombinationTwo==true)){
+                        firstPlayerCounter+=1;
+                    }
+
+                else if((straightOne==true&&threeKindTwo==true)
+                   ||(straightOne==true&&twoPairsTwo==true)
+                   ||(straightOne==true&&onePairTotalyTwo==true)
+                   ||(straightOne==true&&noCombinationTwo==true)){
+                    firstPlayerCounter+=1;
+                   }
+
+                else if((threeKindOne==true&&twoPairsTwo==true)
+                   ||(threeKindOne==true&&onePairTotalyTwo==true)
+                   ||(threeKindOne==true&&noCombinationTwo==true)){
+                    firstPlayerCounter+=1;
+                   }
+
+                else if((twoPairsOne==true&&onePairTotalyTwo==true)
+                   ||(twoPairsOne==true&&noCombinationTwo==true)){
+                    firstPlayerCounter+=1;
+                   }
+
+                else if (onePairTotaly==true&&noCombinationTwo==true){
+                    firstPlayerCounter+=1;
+                }
+
+    }
+
+        cout<<endl<<endl<<"First player total score: "<<firstPlayerCounter<<endl<<"Second player total score: "<<1000-firstPlayerCounter;
+
+}
